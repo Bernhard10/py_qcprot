@@ -7,6 +7,11 @@
  *  Function:       Rapid calculation of the least-squares rotation using a
  *                  quaternion-based characteristic polynomial and
  *                  a cofactor matrix
+ *  
+ *  Slightly modified by:
+ *		    Bernhard Thiel
+ *		    University of Vienna
+ *		    thiel@tbi.univie.ac.at
  *
  *  Author(s):      Douglas L. Theobald
  *                  Department of Biochemistry
@@ -71,7 +76,9 @@
  *
  *  Change History:
  *    2009/04/13      Started source
- *
+ *    2017/02/01      BT: Changed signature of CalcRMSDRotationalMatrix to include 
+ *    		      is_centered flag for use with cython wrapper.
+ *                 
  ******************************************************************************/
 
 #include <stdlib.h>

@@ -2,13 +2,23 @@
  *  -/_|:|_|_\-
  *
  *  File:           qcprot.c
- *  Version:        1.5
+ *  Version:        1.5-1
  *
  *  Function:       Rapid calculation of the least-squares rotation using a
  *                  quaternion-based characteristic polynomial and
  *                  a cofactor matrix
  *
- *  Author(s):      Douglas L. Theobald
+ *  File slightly modified by:
+ *  		    Bernhard Thiel
+ *  		    Theoretical Biochemistry Group
+ *  		    University of Vienna
+ *  		    Waehringerstr 17
+ *  		    1090 Vienna
+ *  		    Austria
+ *  		    thiel@tbi.univie.ac.at
+ *
+ *  Original Author(s):      
+ *  		    Douglas L. Theobald
  *                  Department of Biochemistry
  *                  MS 009
  *                  Brandeis University
@@ -83,6 +93,7 @@
  *    2012/07/26      Minor changes to comments and main.c, more info (v.1.4)
  *    2016/07/13      Fixed normalization of RMSD in FastCalcRMSDAndRotation(), should divide by
  *                    sum of weights (thanks to Geoff Skillman)
+ *    2017/02/01      Small modifications by B.Thiel for use with cython wrapper
  *
  ******************************************************************************/
 #include "qcprot.h"

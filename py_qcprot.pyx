@@ -1,3 +1,8 @@
+__author__ = "Bernhard Thiel"
+__email__ = "thiel@tbi.univie.ac.at"
+__license__ = "BSD 3-clause"
+
+
 import numpy as np
 cimport numpy as np
 from libc.stdlib cimport malloc, free
