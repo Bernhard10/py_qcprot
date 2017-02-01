@@ -13,8 +13,8 @@ def rmsd(coords1, coords2, is_centered=False):
         return 0.
     cdef np.ndarray[double, ndim=2, mode="fortran"] coords1_c = np.asarray(coords1, dtype = float, order="F")
     cdef np.ndarray[double, ndim=2, mode="fortran"] coords2_c = np.asarray(coords2, dtype = float, order="F")
-    if coords1_c.shape != coords2_c.shape or coords1_c.shape[1]!=3:
-        raise ValueError("Both structures need to have the same shape (Nx3), found {} and {}".format(coords1_c.shape, coords2_c.shape))
+    if coords1_c.shape[0] != coords2_c.shape[0] or coords1_c.shape[1] != coords2_c.shape[1] or coords1_c.shape[1] != 3: 
+        raise ValueError("Both structures need to have the same shape (Nx3), found {}x{}, {}x{}".format(coords1_c.shape[0], coords1_c.shape[1], coords2_c.shape[0], coords2_c.shape[1]))
     cdef double[::1] rot_out = np.zeros((9))
     cdef double** point_to_coords1 = <double **>malloc(3 * sizeof(double*))
     cdef double** point_to_coords2 = <double **>malloc(3 * sizeof(double*))

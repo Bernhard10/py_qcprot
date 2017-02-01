@@ -28,17 +28,17 @@ def rmsd_kabsch(coords1, coords2):
     vec_lengths = np.sum(diff_vecs * diff_vecs, axis=1)
     return math.sqrt(sum(vec_lengths) / len(vec_lengths))
 
-def get_random_coord_arrays():
-    b1 = ((np.random.rand(500, 3)-0.5)*300)
-    b2 = (b1+(np.random.rand(500, 3)-0.5)*20)
+def get_random_coord_arrays(num_coords = 500):
+    b1 = ((np.random.rand(num_coords, 3)-0.5)*300)
+    b2 = (b1+(np.random.rand(num_coords, 3)-0.5)*20)
     return b1, b2
 
 class TestRMSD(unittest.TestCase):
     def setUp(self):
         self.a1 = np.array([[1., 1., 1.], [0., 0., 0.], [-1., -1., -1.]], order="C")
         self.a2 = np.array([[2., 2., 2.], [0., 0., 0.], [-2., -2., -2.]], order="C") #RMSD of sqrt(2) to a1
-        self.a3 = np.array([[2., 2., 1.], [1., 1., 0.], [0., 0., -1.]], order="C") #a1 only shifted (no rotation)
-        self.a4 = np.array([[-1., -1., -1.], [0., 0., 0.], [1., 1., 1.]], order="C") #a1 rotated
+        self.a3 = np.array([[2., 2., 1.], [1., 1., 0.], [0., 0., -1.]], order="F") #a1 only shifted (no rotation)
+        self.a4 = np.array([[-1., -1., -1.], [0., 0., 0.], [1., 1., 1.]]) #a1 rotated
 
     def test_rmsd_kabsch(self):
         self.assertAlmostEqual(rmsd_kabsch(self.a1, self.a1), 0)
@@ -68,7 +68,11 @@ class TestRMSD(unittest.TestCase):
             b1 = center_coords(b1)
             b2 = center_coords(b2)
             self.assertAlmostEqual(rmsd_kabsch(b1, b2), rmsd_qc(b1, b2, True))
-
+    def test_handles_wrong_shapes_well(self):
+        b1, b2 = get_random_coord_arrays(20)
+        c1, c2 = get_random_coord_arrays(21)
+        with self.assertRaises(ValueError):
+            rmsd_qc(b1, c1)
 
 class ProfileRMSD(unittest.TestCase):
     """
